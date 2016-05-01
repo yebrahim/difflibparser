@@ -1,4 +1,4 @@
-# python-difflib-parser
+# Python difflibparser
 A simple parser for the python difflib ndiff that returns objects representing diff between two files
 
 Usage
