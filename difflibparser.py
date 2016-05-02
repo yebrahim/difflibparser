@@ -12,7 +12,6 @@ class DifflibParser:
         self.__text1 = text1
         self.__text2 = text2
         self.__diff = list(difflib.ndiff(text1.splitlines(), text2.splitlines()))
-        print(self.__diff)
         self.__currentLineno = 0
 
     def getNextLine(self):
