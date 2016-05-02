@@ -1,8 +1,23 @@
 # Python difflibparser
-A simple parser for the python difflib ndiff that returns objects representing diff between two files
+
+difflibparser is a simple module that parses the output of difflib.ndiff. It takes two strings and exposes a getNextLine() method that returns a dictionary that represents the next line in the diff. The return type always has a 'code' key that contains one of the following values:
+
+    class DiffCode:
+        SIMILAR = 0         # line hasn't changed between the files, its diff starts with '  '
+        RIGHTONLY = 1       # line exists in the right file only, its diff starts with '+ '
+        LEFTONLY = 2        # line exists in the left file only, its diff starts with '- '
+        CHANGED = 3         # line has incremental changes on the left file, the diff is represented
+                                as three of four lines in the order ('-', '+', '?'), ('-', '?', '+')
+                                or ('-', '?', '+', '?')
+
+If the returned code is DiffCode.CHANGED, the result will also contain 'rightchanges' and 'rightchanges' keys, each is a list of indices that have changed on the left and right side respectively. One of these two can be None but not both.
 
 Usage
 -----
+
+    differ = DifflibParser(leftText.splitlines(), rightText.splitlines())
+    for line in differ:
+        print(line)
 
 left file:
 
@@ -20,18 +35,7 @@ right file:
     line4
     line66
 
-difflib-parser is a simple module that parses the output of difflib.ndiff. It takes two strings and exposes a getNextLine() method that returns a dictionary that represents the next line in the diff. The return type always has a 'code' key that contains one of the following values:
-
-    class DiffCode:
-        SIMILAR = 0         # line hasn't changed between the files, its diff starts with '  '
-        RIGHTONLY = 1       # line exists in the right file only, its diff starts with '+ '
-        LEFTONLY = 2        # line exists in the left file only, its diff starts with '- '
-        CHANGED = 3         # line has incremental changes on the left file, the diff is represented as three of four lines
-                                in the order ('-', '+', '?'), ('-', '?', '+') or ('-', '?', '+', '?')
-
-If the returned code is DiffCode.CHANGED, the result will also contain 'rightchanges' and 'rightchanges' keys, each is a list of indices that have changed on the left and right side respectively. One of these two can be None but not both.
-
-For the two files above, these are the returned results when calling getNextLine() repetitively:
+For the two files above, these are the returned results:
 
     {'code': 0, 'line': 'line1'}
     {'rightchanges': [0, 7], 'code': 3, 'newline': 'xlineTw0', 'leftchanges': [6], 'line': 'lineTwo'}
