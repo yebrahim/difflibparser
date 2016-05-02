@@ -15,8 +15,8 @@ If the returned code is DiffCode.CHANGED, the result will also contain 'rightcha
 Usage
 -----
 
-    differ = DifflibParser(leftText.splitlines(), rightText.splitlines())
-    for line in differ:
+    diff = DifflibParser(leftText.splitlines(), rightText.splitlines())
+    for line in diff:
         print(line)
 
 left file:
