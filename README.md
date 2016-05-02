@@ -10,7 +10,7 @@ difflibparser is a simple module that parses the output of difflib.ndiff. It tak
                                 as three of four lines in the order ('-', '+', '?'), ('-', '?', '+')
                                 or ('-', '?', '+', '?')
 
-If the returned code is DiffCode.CHANGED, the result will also contain 'rightchanges' and 'rightchanges' keys, each is a list of indices that have changed on the left and right side respectively. One of these two can be None but not both.
+If the returned code is DiffCode.CHANGED, the result will also contain 'rightchanges' and 'rightchanges' keys, each is a list of indices that have changed on the left and right side respectively. One of these two can be empty but not both.
 
 Usage
 -----
@@ -39,9 +39,9 @@ For the two files above, these are the returned results:
 
     {'code': 0, 'line': 'line1'}
     {'rightchanges': [0, 7], 'code': 3, 'newline': 'xlineTw0', 'leftchanges': [6], 'line': 'lineTwo'}
-    {'rightchanges': None, 'code': 3, 'newline': 'lineThree', 'leftchanges': [9], 'line': 'lineThrees'}
+    {'rightchanges': [], 'code': 3, 'newline': 'lineThree', 'leftchanges': [9], 'line': 'lineThrees'}
     {'code': 0, 'line': 'line4'}
-    {'rightchanges': [5], 'code': 3, 'newline': 'line66', 'leftchanges': None, 'line': 'line6'}
+    {'rightchanges': [5], 'code': 3, 'newline': 'line66', 'leftchanges': [], 'line': 'line6'}
 
 Which matches the output of difflib.ndiff:
 

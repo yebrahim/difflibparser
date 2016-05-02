@@ -63,6 +63,7 @@ class DifflibParser:
            lineTwo and lineTwo[:2] == '+ ' and \
            lineThree and lineThree[:2] == '? ':
             changes['right'] = [i for (i,c) in enumerate(lineThree[2:]) if c in ['+', '^']]
+            changes['left'] = []
             changes['newline'] = lineTwo[2:]
             changes['skiplines'] = 2
             return changes
@@ -70,6 +71,7 @@ class DifflibParser:
         elif lineOne and lineOne[:2] == '- ' and \
            lineTwo and lineTwo[:2] == '? ' and \
            lineThree and lineThree[:2] == '+ ':
+            changes['right'] = []
             changes['left'] = [i for (i,c) in enumerate(lineTwo[2:]) if c in ['-', '^']]
             changes['newline'] = lineThree[2:]
             changes['skiplines'] = 2
