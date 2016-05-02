@@ -24,7 +24,5 @@ print('---------\n')
 
 differ = DifflibParser(file1.splitlines(), file2.splitlines())
 
-line = differ.getNextLine()
-while line:
+for line in differ:
     print(line)
-    line = differ.getNextLine()

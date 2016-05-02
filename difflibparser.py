@@ -13,10 +13,13 @@ class DifflibParser:
         self.__diff = list(difflib.ndiff(text1, text2))
         self.__currentLineno = 0
 
-    def getNextLine(self):
+    def __iter__(self):
+        return self
+
+    def __next__(self):
         result = {}
         if self.__currentLineno >= len(self.__diff):
-            return None
+            raise StopIteration
         currentLine = self.__diff[self.__currentLineno]
         code = currentLine[:2]
         line = currentLine[2:]
@@ -37,7 +40,6 @@ class DifflibParser:
             result['code'] = DiffCode.RIGHTONLY
         self.__currentLineno += 1
         return result
-
 
     def __tryGetIncrementalChange(self, lineno):
         lineOne = self.__diff[lineno] if lineno < len(self.__diff) else None
