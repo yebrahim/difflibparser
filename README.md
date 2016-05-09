@@ -38,10 +38,10 @@ right file:
 For the two files above, these are the returned results:
 
     {'code': 0, 'line': 'line1'}
-    {'rightchanges': [0, 7], 'code': 3, 'newline': 'xlineTw0', 'leftchanges': [6], 'line': 'lineTwo'}
-    {'rightchanges': [], 'code': 3, 'newline': 'lineThree', 'leftchanges': [9], 'line': 'lineThrees'}
+    {'code': 3, 'line': 'lineTwo', 'newline': 'xlineTw0', 'rightchanges': [0, 7], 'leftchanges': [6]}
+    {'code': 3, 'line': 'lineThrees', 'newline': 'lineThree', 'rightchanges': [], 'leftchanges': [9]}
     {'code': 0, 'line': 'line4'}
-    {'rightchanges': [5], 'code': 3, 'newline': 'line66', 'leftchanges': [], 'line': 'line6'}
+    {'code': 3, 'line': 'line6', 'newline': 'line66', 'rightchanges': [5], 'leftchanges': []}
 
 Which matches the output of difflib.ndiff:
 
