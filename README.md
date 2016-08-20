@@ -16,8 +16,8 @@ Usage
 -----
 
     diff = DifflibParser(leftText.splitlines(), rightText.splitlines())
-    for line in diff:
-        print(line)
+    for d in diff:
+        print(d)
 
 left file:
 
